@@ -801,7 +801,7 @@ const get_context_1 = __nccwpck_require__(7740);
  */
 function getRecentCommitLogin(sha) {
     return __awaiter(this, void 0, void 0, function* () {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
+        var _a, _b, _c, _d, _e, _f;
         let lastCommitter;
         try {
             const commitResponse = yield get_context_1.github.rest.repos.getCommit({
@@ -812,10 +812,7 @@ function getRecentCommitLogin(sha) {
                 page: 1
             });
             const commitData = commitResponse.data;
-            core.info(`Commit data: ${JSON.stringify(commitData)}`);
             lastCommitter = ((_a = commitData.author) === null || _a === void 0 ? void 0 : _a.login) || ((_b = commitData.committer) === null || _b === void 0 ? void 0 : _b.login) || ((_d = (_c = commitData.commit) === null || _c === void 0 ? void 0 : _c.committer) === null || _d === void 0 ? void 0 : _d.name) || ((_f = (_e = commitData.commit) === null || _e === void 0 ? void 0 : _e.author) === null || _f === void 0 ? void 0 : _f.name);
-            core.info(`Last committer: ${lastCommitter}`);
-            core.info(`committer decision: ${(_g = commitData.author) === null || _g === void 0 ? void 0 : _g.login}, ${(_h = commitData.committer) === null || _h === void 0 ? void 0 : _h.login}, ${(_k = (_j = commitData.commit) === null || _j === void 0 ? void 0 : _j.committer) === null || _k === void 0 ? void 0 : _k.name}, ${(_m = (_l = commitData.commit) === null || _l === void 0 ? void 0 : _l.author) === null || _m === void 0 ? void 0 : _m.name}`);
             assert.ok(lastCommitter, 'Committer cannot be empty.');
         }
         catch (err) {

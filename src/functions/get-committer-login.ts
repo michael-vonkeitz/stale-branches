@@ -20,12 +20,7 @@ export async function getRecentCommitLogin(sha: string): Promise<string> {
       page: 1
     })
     const commitData = commitResponse.data
-    core.info(`Commit data: ${JSON.stringify(commitData)}`)
     lastCommitter = commitData.author?.login || commitData.committer?.login || commitData.commit?.committer?.name || commitData.commit?.author?.name
-
-    core.info(`Last committer: ${lastCommitter}`)
-    core.info(`committer decision: ${commitData.author?.login}, ${commitData.committer?.login}, ${commitData.commit?.committer?.name}, ${commitData.commit?.author?.name}`)
-
     assert.ok(lastCommitter, 'Committer cannot be empty.')
   } catch (err) {
     if (err instanceof Error) {
